@@ -1,0 +1,38 @@
+{
+  "name": "localShare-core",
+  "version": "1.0.0",
+  "devDependencies": {
+    "ganache-cli": "^6.1.0",
+    "solidity-coverage": "0.5.8",
+    "solium": "^1.1.8",
+    "truffle": "",
+    "truffle-assertions": "^0.4.0",
+    "truffle-bytecode-manager": "^1.1.1",
+    "truffle-extract": "^1.2.1",
+    "web3-utils": "1.0.0-beta.33"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.2",
+    "homedir": "^0.6.0",
+    "ipfs": "^0.31.7",
+    "ipfs-api": "^24.0.1",
+    "openzeppelin-solidity": "^2.0.0-rc.1",
+    "openzeppelin-zos": "^1.9.4",
+    "truffle": "^5.0.0-next.11",
+    "truffle-hdwallet-provider": "^1.0.0-web3one.0"
+  },
+  "scripts": {
+    "compile": "truffle compile",
+    "test": "TRUFFLE_TEST=true npm run ganache-cli:test",
+    "test:gas": "GAS_REPORTER=true npm test",
+    "lint": "solium --dir ./contracts",
+    "coverage": "SOLIDITY_COVERAGE=true npm run ganache-cli:test",
+    "console": "truffle dev",
+    "ganache-cli:test": "scripts/ganache-cli.sh",
+    "abi:extract": "truffle-extract --output abi/ --keys abi",
+    "bytecode:extract": "truffle-bytecode extract -o bytecode",
+    "bytecode:extract:new": "truffle-bytecode extract -o bytecode_new",
+    "bytecode:compare": "npm run bytecode:extract:new && truffle-bytecode compare bytecode bytecode_new",
+    "prepublishOnly": "truffle compile --all && npm run abi:extract -- --no-compile && truffle networks --clean"
+  }
+}
